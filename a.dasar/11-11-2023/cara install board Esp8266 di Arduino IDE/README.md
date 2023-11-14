@@ -27,7 +27,7 @@ buka link berikut untuk melihat [cara menginstall driver ch341](/a.dasar//11-11-
     ctrl + comma
     ```
 5. pada bagian Additional boards manager kemudian paste-kan link tersebut.
-![additional boards manager](ss/additional%20boards%20manager.PNG)
+![additional boards manager](ss/additional%20boards%20manager.png)
 6. kemudian buka `Boards Manager` dengan cara
     ```
     klik Tools > Board > Boards Manager
@@ -38,7 +38,7 @@ buka link berikut untuk melihat [cara menginstall driver ch341](/a.dasar//11-11-
     ```
 7. ketik `esp8266` pada kolom pencarian
 8. klik install pada hasil pencarian esp8266
-![board manager install esp8266](ss/board%20manager%20install%20esp8266.PNG)
+![board manager install esp8266](ss/board%20manager%20install%20esp8266.png)
 
 
 langkah selanjutnya silahkan klik link berikut untuk melihat [cara menggunakan esp8266 di arduino](/a.dasar/11-11-2023/cara%20menggunakan%20esp8266%20di%20arduino/README.md)
