@@ -12,8 +12,8 @@
 
 ## Langkah
 1. buka `Arduino IDE` di komputer atau laptop
-2. install driver Esp8266: <b>biasanya menggunakan CH341</b>\
-buka link berikut untuk melihat [cara menginstall driver ch341](/a.dasar//11-11-2023/cara%20install%20driver%20ch341/README.md)
+2. install driver Esp8266: <b>biasanya menggunakan CH340/CH341/CP210x/Dst</b>\
+buka link berikut untuk melihat [cara menginstall driver ch340/ch341](/a.dasar//11-11-2023/cara%20install%20driver%20ch341/README.md)
 3. copy link berikut
     ```
     https://arduino.esp8266.com/stable/package_esp8266com_index.json
