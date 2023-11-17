@@ -15,6 +15,7 @@ sangat canggih bukan ? dengan demikian kalian tidak perlu menambahkan modul wire
 Secara dasar Arduino X ESPressif sebenarnya sudah merilis library mereka supaya mikrokontroler ini dapat digunakan pada lingkungan kerja Arduino/Arduino IDE. Yakni kita dapat menggunakan library berikut [Arduino/Wifi](https://www.arduino.cc/reference/en/libraries/wifi/)
 
 adapun library opsional yang turut dapat kita gunakan untuk pengembangan lebih lanjut [yakni sebagai berikut](https://github.com/tzapu/WiFiManager)
+
 ## Alat
 * Sebuah Komputer atau Laptop
 * Arduino IDE versi: 2.2.1\
