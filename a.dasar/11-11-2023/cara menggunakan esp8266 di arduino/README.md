@@ -38,7 +38,10 @@
 ![flashing program](ss/flashing.png)
 10. hasil coding yang telah dibuat yaitu program sederhana untuk menghidupkan dan mematikan lampu\
 <video src='ss/hasil coding.mp4' controls="controls"></video>
-![hasil coding](ss/hasil%20coding.mp4)
+
+
+https://github.com/saristek/pustaka-arduino/assets/33443311/442f0a2f-9228-4b6c-b847-8b48b807aacd
+
 
 ## Contoh Program
 ### Menghidupkan dan Mematikan Lampu
