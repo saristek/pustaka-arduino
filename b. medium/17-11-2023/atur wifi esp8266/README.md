@@ -96,7 +96,7 @@ nah, pada artikel kali ini kita akan mulai dengan yang paling dasar beserta cont
     ```
     09:26:33.163 -> Connected, IP address: 172.16.1.55
     ```
-    bukti lengkapnya: 
+    bukti lengkapnya:\
     ![Alt text](ss/inspeksi%20coding.png)
 
 13. di Serial Monitor tertulis IP Address: 172.16.1.55 yang artinya sudah terhubung ke jaringan wifi dan mendapatkan ip tersebut, Menarik...
@@ -106,7 +106,7 @@ nah, pada artikel kali ini kita akan mulai dengan yang paling dasar beserta cont
     caranya: buka cmd di windows
     ketik: ping 172.16.1.55
     ```
-    berikut adalah hasilnya:
+    berikut adalah hasilnya:\
     ![Alt text](ss/cek%20ping.png)
 
     ternyata berhasil terhubung dengan baik tanpa kendala. keren!!
