@@ -36,7 +36,35 @@
 ![upload program](ss/upload.png)
 8. hasil upload atau flashing
 ![flashing program](ss/flashing.png)
+9. hasil coding yang telah dibuat yaitu program sederhana untuk menghidupkan dan mematikan lampu\
+<video src='ss/hasil coding.mp4' controls="controls"></video> 
 
+## Contoh Program
+### Menghidupkan dan Mematikan Lampu
+```cpp
+const int ledPin = LED_BUILTIN;  // the number of the LED pin
+int ledState = LOW;  // ledState used to set the LED
+unsigned long previousMillis = 0;  // will store last time LED was updated
+const long interval = 1000;  // interval at which to blink (milliseconds)
+
+void setup() {
+   pinMode(ledPin, OUTPUT);
+}
+
+void loop() {
+   unsigned long currentMillis = millis();
+   if (currentMillis - previousMillis >= interval) {
+      previousMillis = currentMillis;
+      if (ledState == LOW) {
+         ledState = HIGH;
+      } else {
+         ledState = LOW;
+      }
+      digitalWrite(ledPin, ledState);
+   }
+}
+
+```
 
 ## Artikel Lainnya
 * [atur wifi esp8266](/b.%20medium/17-11-2023/atur%20wifi%20esp8266/README.md)
