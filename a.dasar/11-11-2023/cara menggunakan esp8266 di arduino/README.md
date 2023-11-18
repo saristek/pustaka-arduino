@@ -21,23 +21,24 @@
                 > Ports(COM & LPT)
     ```
     ![device manager](ss/device%20manager.png)
-3. perhatikan pada list Ports (COM & LPT)\
+4. perhatikan pada list Ports (COM & LPT)\
     contoh:
     ```
     Silicon Labs CP210x USB to UART Bridge (COM3)
     ```
-4. pada Arduino IDE pilih (COM3) sesuai Port list yang tertampil di `device manager`\
+5. pada Arduino IDE pilih (COM3) sesuai Port list yang tertampil di `device manager`\
 ![arduino select board](ss/arduino%20select%20board.png)
-5. cari dan sesuaikan dengan board mikro kontroler yang kita miliki\
+6. cari dan sesuaikan dengan board mikro kontroler yang kita miliki\
 ![microcontroller select](ss/microcontroller%20select.png)
-6. coba memulai coding dengan menulis baris perintah sederhana\
+7. coba memulai coding dengan menulis baris perintah sederhana\
 ![contoh program](ss/contoh%20program.png)
-7. lakukan upload program ke mikro kontroler
+8. lakukan upload program ke mikro kontroler
 ![upload program](ss/upload.png)
-8. hasil upload atau flashing
+9. hasil upload atau flashing
 ![flashing program](ss/flashing.png)
-9. hasil coding yang telah dibuat yaitu program sederhana untuk menghidupkan dan mematikan lampu\
-<video src='ss/hasil coding.mp4' controls="controls"></video> 
+10. hasil coding yang telah dibuat yaitu program sederhana untuk menghidupkan dan mematikan lampu\
+<video src='ss/hasil coding.mp4' controls="controls"></video>
+![hasil coding](ss/hasil%20coding.mp4)
 
 ## Contoh Program
 ### Menghidupkan dan Mematikan Lampu
