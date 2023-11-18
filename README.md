@@ -13,6 +13,8 @@
 * [wifi esp8266 [mode ap]](b.%20medium/17-11-2023/wifi%20esp8266%20[mode%20ap]/README.md)
 * [wifi esp8266 [mode client]](b.%20medium/17-11-2023/wifi%20esp8266%20[mode%20client]/README.md)
 
-
+### lanjut
+* [cara menggunakan L298N](/c.%20lanjut/L298N/README.md)
+  
 ## Artikel
 * [Apa itu interface USB CH340/CH341](pustaka/apa%20itu%20interface%20USB%20ch340-ch341/README.md)
