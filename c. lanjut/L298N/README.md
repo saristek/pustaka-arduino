@@ -389,15 +389,15 @@ void setup() {
 
   delay(1000);
   Serial.println(">> Setup");
-  WiFi.mode(WIFI_AP);           //Only Access point
-  WiFi.softAP(ssid, password);  //Start HOTspot removing password will disable security
+  
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Connecting to WiFi..");
+  }
 
-  IPAddress myIP = WiFi.softAPIP();  //Get IP address
-  Serial.println("");
-  Serial.print("Connected to ");
-  Serial.println(ssid);
-  Serial.print("IP address: ");
-  Serial.println(myIP);
+  Serial.println(WiFi.localIP());
+  Serial.println("Memulai robot...");
 
   server.on("/", []() {
     server.send(200, "text/html", INDEX_HTML);
