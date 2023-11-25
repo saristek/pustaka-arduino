@@ -49,8 +49,9 @@ void loop() {
 const char* ssid = "Portal Sransa (Barat)";
 const char* password = "SupportSransa1!";
 
-uint8_t nyala = LOW;
-uint8_t roda = LOW;
+uint8_t status_mesin = LOW;
+uint8_t status_laju = HIGH;
+int kecepatan = 0;
 
 int ENA = 3;  //4;
 int IN1 = 2;  //0;
@@ -58,7 +59,7 @@ int IN2 = 4;  //2;
 
 ESP8266WebServer server(80);
 
-String SendHTML(uint8_t state,uint8_t nyala) {
+String SendHTML(uint8_t mesin,uint8_t laju) {
   String ptr = "<!DOCTYPE html> <html>\n";
   ptr += "<head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, user-scalable=no\">\n";
   ptr += "<title>LED Control</title>\n";
@@ -71,21 +72,98 @@ String SendHTML(uint8_t state,uint8_t nyala) {
   ptr += ".button-off:active {background-color: #2c3e50;}\n";
   ptr += "p {font-size: 14px;color: #888;margin-bottom: 10px;}\n";
   ptr += "</style>\n";
+
+  ptr += "<script>\n\r";
+  ptr += "function sendDAC(value){\r\n";
+  ptr += "document.getElementById('nilai_rentang').innerHTML=value; \r\n";
+  ptr += "server = '/kecepatan?n=' + value;\r\n";
+  ptr += "request = new XMLHttpRequest();\r\n";
+  ptr += "request.onreadystatechange = updateasyncDac;\r\n";
+  ptr += "request.open('ValoreSlider', server, true);\r\n";
+  ptr += "request.send(null);\r\n";
+  ptr += "}\r\n";
+  ptr += "function updateasyncDac(){\r\n";
+  ptr += "if ((request.readyState == 4) && (request.status == 200))\r\n";
+  ptr += "{\r\n";
+  ptr += "}\r\n";
+  ptr += "}\r\n";
+  ptr += "</script>\r\n";
+
   ptr += "</head>\n";
   ptr += "<body>\n";
   ptr += "<h1>Atur L298N dengan ESP8266</h1>\n";
   ptr += "<h3>Menggunakan WIFI</h3>\n";
 
-  if (nyala) {
-    ptr += "<p>status: hidup</p><a class=\"button button-off\" href=\"/mati\">Mati</a>\n";
-    if (state==true) {
+  ptr += "<input type=\"range\" value=\"";
+  ptr += kecepatan ;
+  ptr += "\" style=\"width: 700px; height: 30px;\" id=\"range_slider\" min=\"0\" max=\"255\" value=\"0\" step=\"1\" onchange=\"sendDAC(this.value);\"/>&nbsp;</p>";
+  ptr += "<p><br><span style=\"color: orange; font-size: 50px\" id=\"nilai_rentang\">0</span></p>";
+
+  if (mesin) {
+    ptr += "<p>status: hidup</p><a class=\"button button-off\" href=\"/mati\">Matikan</a>\n";
+    if (laju) {
       ptr += "<p>Laju: Maju</p><a class=\"button button-off\" href=\"/mundur\">Mundur</a>\n";
-    } else if(state==false){
+    } else{
       ptr += "<p>Laju: Mundur</p><a class=\"button button-on\" href=\"/maju\">MAJU</a>\n";
     }
   } else {
-    ptr += "<p>status: mati</p><a class=\"button button-on\" href=\"/hidup\">Hidup</a>\n";
+    ptr += "<p>status: mati</p><a class=\"button button-on\" href=\"/hidup\">Nyalakan</a>\n";
   }
+
+  ptr += "<style>\r\n";
+  ptr += " input[type='range'] {\r\n";
+  ptr += " -webkit-appearance: none;\r\n";
+  ptr += " appearance: none;\r\n";
+  ptr += " -moz-appearance: none;\r\n";
+  ptr += " border-radius: 5px; \r\n";
+  ptr += " box-shadow: inset 15px 15px 15px rgba(1, 121, 41, 0.2); \r\n";
+  ptr += " background-color: #C8EBC2; \r\n";
+  ptr += " height: 20px; \r\n";
+  ptr += " vertical-align: middle; \r\n";
+  ptr += " width: 800px; \r\n";
+  ptr += " } \r\n";
+  ptr += " input[type=range]::-webkit-slider-runnable-track { \r\n";
+  ptr += " -webkit-appearance: none; \r\n";
+  ptr += " appearance: none; \r\n";
+  ptr += " border-radius: 10px; \r\n";
+  ptr += " box-shadow: inset 5px 5px 5px rgba(1, 121, 41, 0.2); \r\n";
+  ptr += " background-color: #F95; \r\n";
+  ptr += " height: 10px; \r\n";
+  ptr += " vertical-align:middle; \r\n";
+  ptr += " border:solid 15px rgba(0,0,0,0.25); \r\n";
+  ptr += " } \r\n";
+  ptr += " input[type='range']::-webkit-slider-thumb { \r\n";
+  ptr += " -webkit-appearance: none; \r\n";
+  ptr += " border-radius: 10px; \r\n";
+  ptr += " background-color: #635B52; \r\n";
+  ptr += " box-shadow:inset 0px 10px 0px rgba(000,000,000,0.5); \r\n";
+  ptr += " border: 8px solid #C8EBC2; \r\n";
+  ptr += " height: 60px; \r\n";
+  ptr += " width: 40px; \r\n";
+  ptr += " vertical-align:middle; \r\n";
+  ptr += " margin-top: -6px; \r\n";
+  ptr += " } \r\n";
+  ptr += " input[type='range']::-moz-range-track { \r\n";
+  ptr += " -moz-appearance: none; \r\n";
+  ptr += " border-radius: 10px; \r\n";
+  ptr += " box-shadow: inset 5px 5px 5px rgba(000,000,000,0.25); \r\n";
+  ptr += " background-color: #EAEAE0; \r\n";
+  ptr += " height: 20  px; \r\n";
+  ptr += " border:solid 10px rgba(0,0,0,0.25); \r\n";
+  ptr += " vertical-align:middle; \r\n";
+  ptr += " margin:0; \r\n";
+  ptr += " padding:0; \r\n";
+  ptr += " } \r\n";
+  ptr += " input[type='range']::-moz-range-thumb { \r\n";
+  ptr += " -moz-appearance: none; \r\n";
+  ptr += " border-radius: 10px; \r\n";
+  ptr += " background-color: rgba(58, 57, 59, 0.9); \r\n";
+  ptr += " box-shadow:inset 0px 1px 0px rgba(0, 255, 0, 0.3); \r\n";
+  ptr += " border: 8px solid #999; \r\n";
+  ptr += " height: 50px; \r\n";
+  ptr += " width: 40px; \r\n";
+  ptr += " } \r\n";
+  ptr += " </style> \r\n";
 
   ptr += "</body>\n";
   ptr += "</html>\n";
@@ -111,83 +189,108 @@ void setup() {
 
   // atur endpoint server
   server.on("/", handle_OnConnect);
-  server.on("/maju", handle_Maju);
-  server.on("/mundur", handle_Mundur);
+  server.on("/maju", roda_maju);
+  server.on("/mundur", roda_mundur);
 
-  server.on("/hidup", handle_Hidup);
-  server.on("/mati", handle_Mati);
+  server.on("/hidup", nyalakan_mesin);
+  server.on("/mati", matikan_mesin);
+  server.on("/kecepatan", with_param);
   server.onNotFound(handle_NotFound);
 
   // Start server
   server.begin();
 }
 
+void with_param() {
+  for (uint8_t i = 0; i < server.args(); i++) {
+    kecepatan = server.arg(i).toInt();
+    Serial.println(kecepatan);
+  }
+  server.send(200, "text/html", "mantap");
+}
+
 void handle_OnConnect() {
-  nyala = LOW;
-  roda = LOW;
-  Serial.println("init roda");
-  server.send(200, "text/html", SendHTML(roda,nyala));
+  Serial.println("reset roda");
+
+  status_mesin = false;
+  status_laju = true;
+  
+  server.send(200, "text/html", SendHTML(status_mesin,status_laju));
 }
 
-void handle_Hidup() {
-  nyala = HIGH;
-  resetRoda();
+void nyalakan_mesin() {
   Serial.println("Perintah Menghidupkan roda");
-  server.send(200, "text/html", SendHTML(true,true));
+
+  status_mesin = true;
+
+  server.send(200, "text/html", SendHTML(status_mesin,status_laju));
 }
 
-void handle_Mati() {
-  nyala = LOW;
+void matikan_mesin() {
   Serial.println("Perintah Mematikan roda");
-  server.send(200, "text/html", SendHTML(true,false));
+
+  status_mesin = false;
+
+  server.send(200, "text/html", SendHTML(status_mesin,status_laju));
 }
 
-void handle_Maju() {
-  roda = HIGH;
+void roda_maju() {
   Serial.println("Perintah Laju Roda: Maju");
-  server.send(200, "text/html", SendHTML(true,true));
+
+  status_mesin = true;
+  status_laju = true;
+
+  server.send(200, "text/html", SendHTML(status_mesin,status_laju));
 }
 
-void handle_Mundur() {
-  roda = LOW;
+void roda_mundur() {
   Serial.println("Perintah Laju Roda: Mundur");
-  server.send(200, "text/html", SendHTML(false, true));
+
+  status_mesin = true;
+  status_laju = false;
+  
+  server.send(200, "text/html", SendHTML(status_mesin,status_laju));
+
 }
 
 void handle_NotFound(){
   server.send(404, "text/plain", "Not found");
 }
 
-void RodaKananMundur() {
-  digitalWrite(ENA, HIGH);
-  digitalWrite(IN1, HIGH);
-  digitalWrite(IN2, LOW);
-}
-
-void RodaKananMaju() {
-  digitalWrite(ENA, HIGH);
+void kanan_maju() {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
 }
 
-void resetRoda(){
-  digitalWrite(ENA, LOW);
+void kanan_mundur() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+}
+
+void roda_hidup(){
+  analogWrite(ENA, 255);
+}
+
+void roda_mati(){
+  analogWrite(ENA, 0);
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, LOW);
 }
 
 void loop() {
   server.handleClient();
-  if(nyala){
-    if (roda) {
-      Serial.println("test roda: kanan, laju: mundur");
-      RodaKananMundur();
+  if(status_mesin){
+    roda_hidup();
+    if (status_laju) {
+      analogWrite(ENA, kecepatan);
+      Serial.println("laju: maju");
+      kanan_maju();
     } else {
-      Serial.println("test roda: kanan, laju: maju");
-      RodaKananMaju();
+      Serial.println("laju: mundur");
+      kanan_mundur();
     }
   }else{
-    resetRoda();
+    roda_mati();
   }
 }
 ```
